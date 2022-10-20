@@ -12,8 +12,7 @@ const app = express();
 
 const port = 3000;
 
-let getDuration = schedule.scheduleJob("* * * * *", () => {
-  // console.log(new Date().toISOString());
+let getDuration = schedule.scheduleJob("30 6 * * MON-FRI", () => {
 
   let dateMs = Date.now();
   dateMs += 120000;
