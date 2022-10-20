@@ -1,6 +1,7 @@
 const express = require("express");
 const schedule = require("node-schedule");
 const axios = require("axios");
+require('dotenv').config();
 
 const app = express();
 
@@ -45,7 +46,7 @@ let getDuration = schedule.scheduleJob("* * * * *", () => {
 
   var config = {
     method: "post",
-    url: `https://routes.googleapis.com/directions/v2:computeRoutes?key=${API_KEY}&fields=routes.duration`,
+    url: `https://routes.googleapis.com/directions/v2:computeRoutes?key=${process.env.API_KEY}&fields=routes.duration`,
     headers: {
       "Content-Type": "application/json",
     },
@@ -63,3 +64,5 @@ let getDuration = schedule.scheduleJob("* * * * *", () => {
 
 app.listen(port);
 console.log(`listening on port - ${port}`);
+
+
