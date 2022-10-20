@@ -45,7 +45,7 @@ let getDuration = schedule.scheduleJob("* * * * *", () => {
 
   var config = {
     method: "post",
-    url: "https://routes.googleapis.com/directions/v2:computeRoutes?key=AIzaSyCDpLV7eAiireleZlZE4uLcjsn1qyr5p84&fields=routes.duration",
+    url: `https://routes.googleapis.com/directions/v2:computeRoutes?key=${API_KEY}&fields=routes.duration`,
     headers: {
       "Content-Type": "application/json",
     },
