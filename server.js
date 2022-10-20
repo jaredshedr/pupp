@@ -1,7 +1,12 @@
 const express = require("express");
 const schedule = require("node-schedule");
 const axios = require("axios");
-require('dotenv').config();
+require("dotenv").config();
+const { getTime } = require("./converter.js");
+const client = require("twilio")(
+  process.env.TWILIO_ACCOUNT_SID,
+  process.env.TWILIO_AUTH_TOKEN
+);
 
 const app = express();
 
@@ -10,8 +15,8 @@ const port = 3000;
 let getDuration = schedule.scheduleJob("* * * * *", () => {
   // console.log(new Date().toISOString());
 
-  let dateMs = Date.now()
-  dateMs += 120000
+  let dateMs = Date.now();
+  dateMs += 120000;
   let currentTime = new Date(dateMs).toISOString();
 
   var data = JSON.stringify({
@@ -55,7 +60,19 @@ let getDuration = schedule.scheduleJob("* * * * *", () => {
 
   axios(config)
     .then(function (response) {
-      console.log(response.data.routes[0].duration);
+      let timeRequired = getTime(response.data.routes[0].duration);
+      client.messages
+        .create({
+          from: process.env.TWILIO_PHONE_NUMBER,
+          to: '914-260-8474',
+          body: timeRequired,
+        })
+        .then(() => {
+          console.log("message created");
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     })
     .catch(function (error) {
       console.log(error);
@@ -64,5 +81,3 @@ let getDuration = schedule.scheduleJob("* * * * *", () => {
 
 app.listen(port);
 console.log(`listening on port - ${port}`);
-
-
