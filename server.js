@@ -2,11 +2,7 @@ const express = require("express");
 const schedule = require("node-schedule");
 const axios = require("axios");
 require("dotenv").config();
-const { getTime } = require("./converter.js");
-const client = require("twilio")(
-  process.env.TWILIO_ACCOUNT_SID,
-  process.env.TWILIO_AUTH_TOKEN
-);
+
 
 const app = express();
 
