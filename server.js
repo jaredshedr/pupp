@@ -31,7 +31,7 @@ let getDuration = schedule.scheduleJob("0 9 * * MON-FRI", async () => {
 
   if (catFact !== 'undefined') {
 
-    let toPhoneNumbers = ['12017478033', '12017059630', '14434627841']
+    let toPhoneNumbers = ['12017478033', '12017059630', '14434627841', '18566251242', '19142608474']
 
     for (let number of toPhoneNumbers) {
 
