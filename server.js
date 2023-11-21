@@ -8,7 +8,7 @@ const app = express();
 
 const port = 3000;
 
-let getDuration = schedule.scheduleJob("20 13 * *", async () => {
+let getDuration = schedule.scheduleJob("0 9 * * *", async () => {
 
   let catUrl = 'https://catfact.ninja/fact?max_length=140'
   let catFact;
